@@ -68,8 +68,11 @@ def __diff_content(new_content_lines, old_content_lines):
     old_content_dict = {}
     if old_content_lines is not None:
         for line in old_content_lines:
+            # We're just interested in the first split match in order to preserve other = symbols inside the translation
             splitted = line.split("=", 1)
-            old_content_dict[splitted[0]] = splitted[1]
+            if len(splitted) > 1:
+                # If length is equals to 1 probable we're hitting a comment and we're not interested in it
+                old_content_dict[splitted[0]] = splitted[1]
 
     final_content = []
     for line in new_content_lines:
