@@ -12,14 +12,13 @@ parser.add_argument("-if", "--i18n-folder", dest='i18n_folder', required=True, h
 parser.add_argument("-fp", "--file-patterns", dest='file_patterns', required=False, default=['*.xml', '*.js'],
                     nargs='+', help="Array of file extension pattern patterns where to search i18n strings")
 parser.add_argument("-ip", "--i18n-patterns", dest='i18n_patterns', required=False,
-                    default=['{i18n>([^}]+)}', '\.getTranslation\("([^"]+)"\)'], nargs='+',
+                    default=['{i18n>([^}]+)}'], nargs='+',
                     help="Array of i18n patterns")
 parser.add_argument("-l", "--languages", dest='languages', required=False, default=['en'], nargs='+',
                     help="Array of languages supported by your project")
 parser.add_argument("-ml", "--main-language", dest='main_language', required=False, default='en',
                     help="Project's main language")
 args = parser.parse_args()
-
 
 file_patterns = args.file_patterns
 app_languages = args.languages
@@ -41,13 +40,14 @@ def __match_content(file_name, _i18n_patterns):
                         local_i18n.append("{0}".format(match))
 
             local_i18n.sort()
-            # local_i18n = ["# Matches for file {0}".format(os.path.realpath(file_name))] + local_i18n
+            local_i18n = ["# Matches in file {0}".format(os.path.realpath(file_name))] + local_i18n
     return local_i18n
 
 
 def __write_file(path, content_lines):
     old_content_lines = __read_file_per_line(path)
-    content = "\n".join(__diff_content(content_lines, old_content_lines))
+    diff_content = __diff_content(content_lines, old_content_lines)
+    content = "\n".join(diff_content)
 
     target = open(path, 'w')
     target.write(content)
@@ -74,7 +74,11 @@ def __diff_content(new_content_lines, old_content_lines):
     final_content = []
     for line in new_content_lines:
         value = old_content_dict.get(line, "")
-        final_content.append("{0}={1}".format(line, value))
+        if line.startswith('#'):
+            # We're in a comment, just append as it is
+            final_content.append(line)
+        else:
+            final_content.append("{0}={1}".format(line, value))
 
     return final_content
 
