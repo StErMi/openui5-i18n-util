@@ -16,14 +16,13 @@ Download the project wherever you want, no dependency needed (apart from python 
 ## Command line parameters
 
 | Short Version | Long Version | Required | Default | Description
-| :---- | :------------------- | :---- | :---------  | :---------
-| -pf | --project_folder | Yes | None | Project's root folder
-| -if | --i18n_folder    | Yes | None | i18n root folder
-| -fp | --file-patterns  | No  | ['*.xml', '*.js'] | Array of file extension pattern patterns where to search i18n strings
-| -ip | --i18n-patterns  | No | ['{i18n>([^}]+)}'] | Array of i18n patterns
-| -l  | --languages      | No | ['en'] | Array of languages supported by your project
-| -ml | --main-language  | No | 'en'   | Project's main language 
-|
+| :---| :----------------- | :---| :----------------- | :---------
+| -pf | --project-folder   | Yes | None               | Project's root folder
+| -if | --i18n-folder      | Yes | None | i18n root folder
+| -fp | --file-patterns    | No  | ['*.xml', '*.js']  | Array of file extension pattern patterns where to search i18n strings
+| -ip | --i18n-patterns    | No  | ['{i18n>([^}]+)}'] | Array of i18n patterns
+| -l  | --languages        | No  | ['en']             | Array of languages supported by your project
+| -ml | --main-language    | No  | 'en'               | Project's main language 
 
 ## Usage
 
