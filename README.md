@@ -4,6 +4,11 @@ We all know, developers are pretty lazy, it's a solid reality.
 
 This script will search all your i18n strings and build auto-magically (while you're drinking your deserved cup  of coffe) every translations file for you.
 
+### Restrictions
+
+ - It's not supporting smart-merge. This script will override manual translations added in your i18n folder but it will keep older one that matches pattern
+ - It does not support (at the moment) parametric i18n (but I'm working on it)
+
 ## Installation
 
 Download the project wherever you want, no dependency needed (apart from python 2.7)
@@ -29,9 +34,13 @@ Download the project wherever you want, no dependency needed (apart from python 
 
 ## History
 
+#### 07/03/2017 
+
+ - Added comment inside translation to trace from which file the i18n comes from
+
 #### 06/03/2017 
 
-First commit yay!
+- First commit yay!
 
 ## Credits
 
